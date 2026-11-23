@@ -1,0 +1,106 @@
+`},
+    3: {
+      title: "📙 Level 3 — Bikin Game Sendiri",
+      html: `
+        <h2>📙 Level 3 — Bikin Game</h2>
+        <p><b>1. Pilih Engine</b><br>- Unity (C#) → 2D/3D, paling populer<br>- Godot (GDScript) → ringan, open-source<br>- LibGDX (Java/Kotlin) → Android native<br>- Pygame (Python) → belajar dasar</p>
+        <p><b>2. Game Loop</b></p>
+        <pre>while (running) {
+    update()
+    render()
+}</pre>
+        <p><b>3. Contoh Pygame Sederhana</b></p>
+        <pre>import pygame
+pygame.init()
+screen = pygame.display.set_mode((400, 400))
+running = True
+while running:
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            running = False
+    screen.fill((0, 0, 0))
+    pygame.display.flip()</pre>
+        <p><b>4. Fisika Dasar</b><br>- Gravitasi: <code>velocity_y += 0.5</code><br>- Tabrakan: <code>if rect1.colliderect(rect2)</code></p>
+        <p><b>5. Sound &amp; Music</b></p>
+        <pre>pygame.mixer.music.load("bgm.mp3")
+pygame.mixer.music.play(-1)</pre>
+        <div class="task">👉 Tugas: Bikin game "catch the ball" sederhana!</div>
+      `
+    },
+    4: {
+      title: "📕 Level 4 — Master Programmer",
+      html: `
+        <h2>📕 Level 4 — Master</h2>
+        <p><b>1. Design Pattern</b><br>Singleton, Factory, Observer, MVC, MVVM</p>
+        <p><b>2. Clean Code</b><br>- Nama variabel jelas<br>- Fungsi pendek &amp; fokus<br>- Hindari duplikasi (DRY)</p>
+        <p><b>3. Testing</b><br>- Unit Test: test 1 fungsi<br>- Integration Test: test gabungan<br>- E2E Test: test dari user perspective</p>
+        <p><b>4. CI/CD</b><br>GitHub Actions, GitLab CI, Jenkins</p>
+        <p><b>5. Arsitektur</b><br>- Monolith → Microservices<br>- REST API vs GraphQL<br>- Message Queue (RabbitMQ, Kafka)</p>
+        <p><b>6. Performance</b><br>- Profiling<br>- Caching (Redis, Memcached)<br>- Lazy loading</p>
+        <p><b>7. Security</b><br>- OWASP Top 10<br>- SQL Injection, XSS, CSRF<br>- Enkripsi &amp; Hashing</p>
+        <div class="task">👉 Tugas: Refactor project lama pake clean code + tulis unit test!</div>
+      `
+    }
+  };
+
+  function showLevel(n) {
+    document.getElementById('header').style.display = 'none';
+    document.getElementById('menu').style.display = 'none';
+    const view = document.getElementById('contentView');
+    document.getElementById('contentCard').innerHTML = levels[n].html;
+    view.classList.add('active');
+    window.scrollTo(0, 0);
+    // Update judul tab
+    document.title = levels[n].title + " — CodingMaster";
+  }
+
+  function backToMenu() {
+    document.getElementById('header').style.display = 'block';
+    document.getElementById('menu').style.display = 'flex';
+    document.getElementById('contentView').classList.remove('active');
+    document.title = "CodingMaster — Dari Pemula sampai Master";
+    window.scrollTo(0, 0);
+  }
+{
+  "name": "CodingMaster",
+  "short_name": "CodingMaster",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0B0B12",
+  "theme_color": "#0B0B12",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+const CACHE = 'codingmaster-v1';
+const ASSETS = ['index.html', 'manifest.json'];
+
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request))
+  );
+});
+
+</script>
+</script>
+
+</body>
+</html>
